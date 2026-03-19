@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIZAKAN 設定</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+
+    <div class="settings-box">
+        <h1>SIZAKAN</h1>
+        <h2>設定</h2>
+
+        <!-- ユーザー名 -->
+        <div class="setting-item">
+            <label>現在のユーザー名</label>
+            <div class="setting-display">
+                <span id="current-username">ユーザー名</span>
+                <a href="change-username.html" class="change-link">変更</a>
+            </div>
+        </div>
+
+        <!-- メールアドレス -->
+        <div class="setting-item">
+            <label>現在のメールアドレス</label>
+            <div class="setting-display">
+                <span id="current-email">example@example.com</span>
+                <a href="change-email.html" class="change-link">変更</a>
+            </div>
+        </div>
+
+        <!-- パスワード変更 -->
+        <div class="setting-item">
+            <label>パスワード</label>
+            <div class="setting-display">
+                <span>********</span>
+                <a href="change-password/change-password.html" class="change-link">変更</a>
+            </div>
+        </div>
+
+        <!-- 通知設定 -->
+        <div class="setting-item">
+            <label>通知設定</label>
+            <select>
+                <option value="on">オン</option>
+                <option value="off">オフ</option>
+            </select>
+        </div>
+
+    </div>
+
+    <!-- 下部ナビゲーション -->
+    <div class="bottom-nav">
+        <a href="../items/list.html">在庫一覧</a>
+        <a href="../add-material/add-material.html">資材登録</a>
+        <a href="../history/history.html">履歴</a>
+        <a href="settings.html" class="active">設定</a>
+    </div>
+
+</body>
+</html>
