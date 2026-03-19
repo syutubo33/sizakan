@@ -126,3 +126,171 @@ body {
 .signup-box a:hover {
     text-decoration: underline;
 }
+
+/* 資材登録ボックス */
+.material-box {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    width: 350px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+/* タイトル */
+.material-box h1 {
+    margin: 0;
+    font-size: 26px;
+    color: #333;
+}
+
+.material-box h2 {
+    margin-top: 5px;
+    margin-bottom: 25px;
+    font-size: 18px;
+    color: #555;
+}
+
+/* ラベル + 入力欄の横並び */
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.row label {
+    width: 40%;
+    text-align: left;
+    font-size: 14px;
+    color: #333;
+}
+
+.row input,
+.row textarea {
+    width: 55%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.row textarea {
+    height: 60px;
+    resize: none;
+}
+
+/* 登録ボタン */
+.register-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.register-btn:hover {
+    background-color: #0056b3;
+}
+
+/* 下部ナビゲーション */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: white;
+    display: flex;
+    justify-content: space-around;
+    padding: 12px 0;
+    border-top: 1px solid #ddd;
+}
+
+.bottom-nav a {
+    color: #555;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.bottom-nav a.active {
+    color: #007bff;
+    font-weight: bold;
+}
+
+/* 在庫一覧ボックス */
+.list-box {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    width: 360px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+/* タイトル */
+.list-box h1 {
+    margin: 0;
+    font-size: 26px;
+    color: #333;
+}
+
+.list-box h2 {
+    margin-top: 5px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    color: #555;
+}
+
+/* 検索バー */
+.search-bar {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+/* テーブル */
+.stock-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.stock-table th {
+    background: #f5f5f5;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+.stock-table td {
+    padding: 10px 5px;
+    border-bottom: 1px solid #eee;
+}
+
+/* 状態バッジ */
+.status {
+    display: inline-block;
+    padding: 3px 6px;
+    border-radius: 6px;
+    font-size: 12px;
+    margin-right: 4px;
+    color: white;
+}
+
+.status.low {
+    background: #ff5a5a;
+}
+
+.status.ok {
+    background: #4caf50;
+}
+
+.status.order {
+    background: #007bff;
+}
+

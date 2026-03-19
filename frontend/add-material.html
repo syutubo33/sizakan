@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIZAKAN 資材登録</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="material-box">
+        <h1>SIZAKAN</h1>
+        <h2>資材登録</h2>
+
+        <form>
+            <div class="row">
+                <label>資材名</label>
+                <input type="text" name="name" placeholder="例：Lポリ袋" required>
+            </div>
+
+            <div class="row">
+                <label>カテゴリ</label>
+                <input type="text" name="category" placeholder="例：紙資材" required>
+            </div>
+
+            <div class="row">
+                <label>現在在庫数</label>
+                <input type="number" name="stock" placeholder="例：50" required>
+            </div>
+
+            <div class="row">
+                <label>最低在庫数（アラート）</label>
+                <input type="number" name="alert" placeholder="例：20" required>
+            </div>
+
+            <div class="row">
+                <label>備考</label>
+                <textarea name="note" placeholder="メモがあれば入力"></textarea>
+            </div>
+
+            <button type="submit" class="register-btn">資材を登録</button>
+        </form>
+    </div>
+
+    <!-- 下部ナビゲーション -->
+    <div class="bottom-nav">
+        <a href="list.html">在庫一覧</a>
+        <a href="add-material.html" class="active">資材登録</a>
+        <a href="history.html">履歴</a>
+        <a href="settings.html">設定</a>
+    </div>
+
+</body>
+</html>
