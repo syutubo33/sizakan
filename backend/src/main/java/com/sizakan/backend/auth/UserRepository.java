@@ -6,5 +6,5 @@ import java.util.Optional;
 
 //User エンティティを主キーLongで自動CRUDする
 public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findByEmail(String email);
+    User findByEmail(String email);
 }
