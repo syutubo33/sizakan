@@ -499,3 +499,18 @@ body {
 .back-btn:hover {
     text-decoration: underline;
 }
+
+/*数量変更*/
+.stock-input {
+    width: 60px;
+    border: none;
+    background: transparent;
+    text-align: center;
+    font-size: 16px;
+}
+
+.stock-input:focus {
+    outline: 2px solid #4da3ff;
+    background: #eef7ff;
+    border-radius: 4px;
+}
