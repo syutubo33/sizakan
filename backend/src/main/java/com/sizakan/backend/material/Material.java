@@ -17,6 +17,7 @@ public class Material {
     private int quantity;
     private String unit;
 
+    @Column(name = "user_id")
     private Long userId;
 
     @Column(name = "created_at")
