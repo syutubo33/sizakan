@@ -22,8 +22,11 @@ public class HistoryService {
         historyRepository.save(h);
     }
 
-    public List<History> getHistory(Long userId) {
-    return historyRepository.findByUserIdOrderByCreatedAtDesc(userId);
-
+    public List<History> getHistory(Long userId, int page, int size) {
+        return historyRepository.findByUserIdOrderByCreatedAtDesc(userId)
+                .stream()
+                .skip((long) page * size)
+                .limit(size)
+                .toList();
     }
 }

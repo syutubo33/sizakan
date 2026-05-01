@@ -14,7 +14,10 @@ public class HistoryController {
     private HistoryService historyService;
 
     @GetMapping
-    public List<History> getHistory(@RequestParam Long userId) {
-        return historyService.getHistory(userId);
+    public List<History> getHistory(
+            @RequestParam Long userId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "50") int size) {
+        return historyService.getHistory(userId, page, size);
     }
 }
