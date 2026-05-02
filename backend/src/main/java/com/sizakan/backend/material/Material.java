@@ -23,6 +23,9 @@ public class Material {
     @Column(name = "created_at")
     private java.sql.Timestamp createdAt;
 
+    @Column(name = "remarks")
+    private String remarks;
+
     @PrePersist
 protected void onCreate() {
     this.createdAt = new java.sql.Timestamp(System.currentTimeMillis());

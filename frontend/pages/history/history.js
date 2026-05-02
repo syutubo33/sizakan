@@ -1,47 +1,58 @@
 const userId = localStorage.getItem("userId") || 1;
 let currentPage = 0;
 const pageSize = 50;
+let allHistory = [];
+let filteredHistory = [];
 
-function loadHistory(page = 0) {
-    fetch(`http://localhost:8080/history?userId=${userId}&page=${page}&size=${pageSize}`)
+function loadHistory() {
+    fetch(`http://localhost:8080/history?userId=${userId}&page=0&size=1000`)
         .then(res => res.json())
         .then(data => {
-            const tbody = document.querySelector(".history-table tbody");
-            tbody.innerHTML = "";
-
-            if (data.length === 0) {
-                tbody.innerHTML = `
-                    <tr>
-                        <td colspan="4" style="text-align:center; color:#777;">
-                            履歴がありません
-                        </td>
-                    </tr>
-                `;
-                return;
-            }
-
-            data.forEach(h => {
-                const tr = document.createElement("tr");
-
-                tr.innerHTML = `
-                    <td>${formatDate(h.createdAt)}</td>
-                    <td>${h.materialName}</td>
-                    <td>${formatAction(h)}</td>
-                    <td>${h.userId}</td>
-                `;
-
-                tbody.appendChild(tr);
-            });
-
-            // 前へボタン
-            document.getElementById("prevBtn").disabled = page === 0;
-            // 次へボタン
-            document.getElementById("nextBtn").disabled = data.length < pageSize;
-            document.getElementById("pageNum").textContent = page + 1;
+            allHistory = data;
+            filteredHistory = data;
+            renderHistory(currentPage);
         })
         .catch(err => {
             console.error("履歴取得エラー:", err);
         });
+}
+
+function renderHistory(page = 0) {
+    const tbody = document.querySelector(".history-table tbody");
+    tbody.innerHTML = "";
+
+    const start = page * pageSize;
+    const end = start + pageSize;
+    const pageData = filteredHistory.slice(start, end);
+
+    if (pageData.length === 0) {
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="4" style="text-align:center; color:#777;">
+                    履歴がありません
+                </td>
+            </tr>
+        `;
+        document.getElementById("prevBtn").disabled = page === 0;
+        document.getElementById("nextBtn").disabled = true;
+        document.getElementById("pageNum").textContent = page + 1;
+        return;
+    }
+
+    pageData.forEach(h => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+            <td>${formatDate(h.createdAt)}</td>
+            <td>${h.materialName}</td>
+            <td>${formatAction(h)}</td>
+            <td>${h.userName || h.userId}</td>
+        `;
+        tbody.appendChild(tr);
+    });
+
+    document.getElementById("prevBtn").disabled = page === 0;
+    document.getElementById("nextBtn").disabled = end >= filteredHistory.length;
+    document.getElementById("pageNum").textContent = page + 1;
 }
 
 function formatDate(dateString) {
@@ -56,19 +67,33 @@ function formatAction(h) {
     return h.action;
 }
 
+// 検索機能
+document.querySelector(".search-bar")?.addEventListener("input", (e) => {
+    const query = e.target.value.toLowerCase();
+    filteredHistory = allHistory.filter(h => 
+        h.materialName.toLowerCase().includes(query) ||
+        h.action.toLowerCase().includes(query) ||
+        (h.oldValue || "").toLowerCase().includes(query) ||
+        (h.newValue || "").toLowerCase().includes(query) ||
+        (h.userName || "").toLowerCase().includes(query)
+    );
+    currentPage = 0;
+    renderHistory(currentPage);
+});
+
 // 初期読み込み
-loadHistory(currentPage);
+loadHistory();
 
 // 前へボタン
 document.getElementById("prevBtn").addEventListener("click", () => {
     if (currentPage > 0) {
         currentPage--;
-        loadHistory(currentPage);
+        renderHistory(currentPage);
     }
 });
 
 // 次へボタン
 document.getElementById("nextBtn").addEventListener("click", () => {
     currentPage++;
-    loadHistory(currentPage);
+    renderHistory(currentPage);
 });

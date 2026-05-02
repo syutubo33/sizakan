@@ -19,6 +19,9 @@ public class History {
     private String newValue;
     private Long userId;
 
+    @Transient
+    private String userName;
+
     @Column(name = "created_at")
     private java.sql.Timestamp createdAt;
 

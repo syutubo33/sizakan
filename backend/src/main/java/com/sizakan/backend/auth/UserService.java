@@ -19,6 +19,9 @@ public class UserService {
 
     public User login(LoginRequest req) {
         User user = userRepository.findByEmail(req.getEmail());
+        if (user == null) {
+            user = userRepository.findByUsername(req.getEmail());
+        }
 
         if (user == null) {
             throw new RuntimeException("User not found");

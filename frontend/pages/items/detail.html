@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIZAKAN 資材詳細</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+
+    <div class="detail-box">
+        <h1>SIZAKAN</h1>
+        <h2>資材詳細</h2>
+
+        <div class="detail-content">
+            <div class="detail-item">
+                <label>資材名</label>
+                <p id="detail-name">-</p>
+            </div>
+
+            <div class="detail-item">
+                <label>在庫数</label>
+                <p id="detail-quantity">-</p>
+            </div>
+
+            <div class="detail-item">
+                <label>単位</label>
+                <p id="detail-unit">-</p>
+            </div>
+
+            <div class="detail-item">
+                <label>状態</label>
+                <p id="detail-status">-</p>
+            </div>
+
+            <div class="detail-item">
+                <label>備考</label>
+                <p id="detail-remarks">-</p>
+            </div>
+
+            <div class="detail-actions">
+                <a href="list.html" class="back-btn">← 戻る</a>
+                <button id="editBtn" class="edit-btn">編集</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 下部ナビゲーション -->
+    <div class="bottom-nav">
+        <a href="list.html">在庫一覧</a>
+        <a href="../add-material/add-material.html">資材登録</a>
+        <a href="../history/history.html">履歴</a>
+        <a href="../settings/settings.html">設定</a>
+    </div>
+
+    <script src="detail.js"></script>
+</body>
+</html>

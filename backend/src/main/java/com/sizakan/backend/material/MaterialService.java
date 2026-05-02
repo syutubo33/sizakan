@@ -46,6 +46,7 @@ public class MaterialService {
         m.setName(newData.getName());
         m.setQuantity(newData.getQuantity());
         m.setUnit(newData.getUnit());
+        m.setRemarks(newData.getRemarks());
 
         Material updated = materialRepository.save(m);
 

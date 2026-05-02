@@ -1,4 +1,38 @@
 const userId = localStorage.getItem("userId") || 1;
+const urlParams = new URLSearchParams(window.location.search);
+const materialId = urlParams.get("id");
+
+// 編集モードの確認
+const isEditMode = materialId !== null;
+
+if (isEditMode) {
+    // 編集モード
+    document.getElementById("page-title").textContent = "資材編集";
+    document.getElementById("submit-btn").textContent = "更新";
+
+    // 既存データを取得して表示
+    fetch(`http://localhost:8080/materials?userId=${userId}`)
+        .then(res => res.json())
+        .then(data => {
+            const material = data.find(m => m.id == materialId);
+            if (!material) {
+                alert("資材が見つかりません");
+                window.location.href = "../items/list.html";
+                return;
+            }
+
+            // フォームにデータを入力
+            document.querySelector("input[name='name']").value = material.name;
+            document.querySelector("input[name='unit']").value = material.unit;
+            document.querySelector("input[name='stock']").value = material.quantity;
+            document.querySelector("textarea[name='note']").value = material.remarks || "";
+        })
+        .catch(err => {
+            console.error("データ取得エラー:", err);
+            alert("データの取得に失敗しました");
+            window.location.href = "../items/list.html";
+        });
+}
 
 document.querySelector("form").addEventListener("submit", (e) => {
     e.preventDefault();
@@ -6,34 +40,53 @@ document.querySelector("form").addEventListener("submit", (e) => {
     const name = document.querySelector("input[name='name']").value;
     const unit = document.querySelector("input[name='unit']").value;
     const stock = Number(document.querySelector("input[name='stock']").value);
-    const alertStock = Number(document.querySelector("input[name='alert']").value);
     const note = document.querySelector("textarea[name='note']").value;
 
-    // バックエンドに送るのは Material の項目だけ
     const payload = {
         name: name,
-        quantity: stock,   // stock → quantity に変換
-        unit: unit,    // unit を unit として送る（必要なら変更）
-        userId: userId
+        quantity: stock,
+        unit: unit,
+        userId: userId,
+        remarks: note
     };
 
-    console.log("送信データ:", payload);
-
-    fetch("http://localhost:8080/materials", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-    })
-    .then(res => {
-        if (!res.ok) throw new Error("登録に失敗しました");
-        return res.json();
-    })
-    .then(data => {
-        alert("資材を登録しました");
-        window.location.href = "../items/list.html";
-    })
-    .catch(err => {
-        console.error("登録エラー:", err);
-        alert("登録に失敗しました");
-    });
+    if (isEditMode) {
+        // 更新処理
+        fetch(`http://localhost:8080/materials/${materialId}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        })
+        .then(res => {
+            if (!res.ok) throw new Error("更新に失敗しました");
+            return res.json();
+        })
+        .then(data => {
+            alert("資材を更新しました");
+            window.location.href = `../items/detail.html?id=${materialId}`;
+        })
+        .catch(err => {
+            console.error("更新エラー:", err);
+            alert("更新に失敗しました");
+        });
+    } else {
+        // 登録処理
+        fetch("http://localhost:8080/materials", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        })
+        .then(res => {
+            if (!res.ok) throw new Error("登録に失敗しました");
+            return res.json();
+        })
+        .then(data => {
+            alert("資材を登録しました");
+            window.location.href = "../items/list.html";
+        })
+        .catch(err => {
+            console.error("登録エラー:", err);
+            alert("登録に失敗しました");
+        });
+    }
 });
