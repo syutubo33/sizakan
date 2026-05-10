@@ -25,7 +25,7 @@ document.querySelector("form").addEventListener("submit", async (e) => {
         }
 
         alert("登録が完了しました。ログイン画面へ遷移します。");
-        window.location.href = "../signin/index.html";
+        window.location.href = "../../../signin/index.html";
     } catch (err) {
         console.error("登録エラー:", err);
         alert("登録に失敗しました。");
