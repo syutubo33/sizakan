@@ -41,12 +41,14 @@
 
     <!-- 下部ナビゲーション -->
     <div class="bottom-nav">
-        <a href="../items/list.html">在庫一覧</a>
+        <a href="../items/index.html">在庫一覧</a>
         <a href="../add-material/add-material.html">資材登録</a>
         <a href="history.html" class="active">履歴</a>
         <a href="../settings/settings.html">設定</a>
     </div>
-
-<script src="../history/history.js"></script>
+<script>
+    // 本番環境では backend URL を指定してください。
+    window.API_BASE_URL = "https://sizakan-backend.onrender.com";
+</script><script src="../history/history.js"></script>
 </body>
 </html>
