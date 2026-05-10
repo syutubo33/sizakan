@@ -1,3 +1,9 @@
+const API_BASE_URL = window.API_BASE_URL || (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" ? "http://localhost:8080" : window.location.origin);
+
+function apiUrl(path) {
+    return `${API_BASE_URL}${path}`;
+}
+
 document.querySelector("form").addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -5,7 +11,7 @@ document.querySelector("form").addEventListener("submit", async (e) => {
     const password = document.querySelector('input[name="password"]').value;
 
     try {
-        const res = await fetch("http://localhost:8080/auth/login", {
+        const res = await fetch(apiUrl("/auth/login"), {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password })

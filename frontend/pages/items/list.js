@@ -1,10 +1,16 @@
+const API_BASE_URL = window.API_BASE_URL || (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" ? "http://localhost:8080" : window.location.origin);
+
+function apiUrl(path) {
+    return `${API_BASE_URL}${path}`;
+}
+
 // ログイン時に保存した userId を取得（なければ 1 を仮使用）
 const userId = localStorage.getItem("userId") || 1;
 let allMaterials = [];
 
 // 在庫一覧を取得
 function loadMaterials() {
-    fetch(`http://localhost:8080/materials?userId=${userId}`)
+    fetch(apiUrl(`/materials?userId=${userId}`))
         .then(res => {
             if (!res.ok) {
                 throw new Error(`HTTPエラー: ${res.status}`);
@@ -83,7 +89,7 @@ function attachDeleteEvents() {
             const id = e.target.dataset.id;
             if (!confirm("この資質を削除しますか？")) return;
 
-            const res = await fetch(`http://localhost:8080/materials/${id}`, {
+            const res = await fetch(apiUrl(`/materials/${id}`), {
                 method: "DELETE"
             });
 

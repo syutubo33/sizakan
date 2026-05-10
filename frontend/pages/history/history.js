@@ -1,3 +1,9 @@
+const API_BASE_URL = window.API_BASE_URL || (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" ? "http://localhost:8080" : window.location.origin);
+
+function apiUrl(path) {
+    return `${API_BASE_URL}${path}`;
+}
+
 const userId = localStorage.getItem("userId") || 1;
 let currentPage = 0;
 const pageSize = 50;
@@ -5,7 +11,7 @@ let allHistory = [];
 let filteredHistory = [];
 
 function loadHistory() {
-    fetch(`http://localhost:8080/history?userId=${userId}&page=0&size=1000`)
+    fetch(apiUrl(`/history?userId=${userId}&page=0&size=1000`))
         .then(res => res.json())
         .then(data => {
             allHistory = data;

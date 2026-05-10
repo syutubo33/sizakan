@@ -1,3 +1,9 @@
+const API_BASE_URL = window.API_BASE_URL || (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" ? "http://localhost:8080" : window.location.origin);
+
+function apiUrl(path) {
+    return `${API_BASE_URL}${path}`;
+}
+
 const userId = localStorage.getItem("userId") || 1;
 const urlParams = new URLSearchParams(window.location.search);
 const materialId = urlParams.get("id");
@@ -5,15 +11,15 @@ const materialId = urlParams.get("id");
 // URLパラメータから資材IDを取得して詳細を表示
 if (!materialId) {
     alert("資材IDが指定されていません");
-    window.location.href = "list.html";
+    window.location.href = "index.html";
 } else {
-    fetch(`http://localhost:8080/materials?userId=${userId}`)
+    fetch(apiUrl(`/materials?userId=${userId}`))
         .then(res => res.json())
         .then(data => {
             const material = data.find(m => m.id == materialId);
             if (!material) {
                 alert("資材が見つかりません");
-                window.location.href = "list.html";
+                window.location.href = "index.html";
                 return;
             }
 
@@ -32,7 +38,7 @@ if (!materialId) {
         .catch(err => {
             console.error("詳細取得エラー:", err);
             alert("詳細の取得に失敗しました");
-            window.location.href = "list.html";
+            window.location.href = "index.html";
         });
 }
 
