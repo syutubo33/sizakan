@@ -33,7 +33,7 @@ document.querySelector("form").addEventListener("submit", async (e) => {
         localStorage.setItem("email", user.email);
 
         // 在庫一覧画面へ遷移
-        window.location.href = "../items/list.html";
+        window.location.href = "../items/index.html";
     } catch (err) {
         console.error("ログインエラー:", err);
         alert("ログインに失敗しました。");
